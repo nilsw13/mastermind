@@ -73,7 +73,7 @@ void jeu(const char couleurs[], const int max_tentatives, const int nb_couleurs,
             continuer = 1;
             printf("Donnez un code de 4 couleurs parmis {'R','V','B','J','O'} \n ");
             fflush(stdin);
-            scanf("%c%c%c%c%*c", saisie_user, (saisie_user+1), (saisie_user+2), (saisie_user+3));
+            scanf("%c%c%c%c", saisie_user, (saisie_user+1), (saisie_user+2), (saisie_user+3));
 
             int nb_couleurs_places = 0;
 
