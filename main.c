@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 void jeu(const char couleurs[], const int max_tentatives, const int nb_couleurs, const int taille_code, char code_secret[], char saisie_user[],int choix, int continuer);
 void regles(const char couleurs[], const int max_tentatives, const int nb_couleurs, const int taille_code, char code_secret[], char saisie_user[], int choix, int continuer);
@@ -76,13 +77,25 @@ void jeu(const char couleurs[], const int max_tentatives, const int nb_couleurs,
             scanf("%c%c%c%c", saisie_user, (saisie_user+1), (saisie_user+2), (saisie_user+3));
 
             int nb_couleurs_places = 0;
+            int nb_couleurs_presentes = 0;
 
-            for (int i = 0; i<4; i++)
+            for (int i = 0; i<4; i++) // parcours le code secret
             {
-                if (code_secret[i] == saisie_user[i])
+                int couleurs_presente = 0;
+                for(int j = 0; j<taille_code;j++) // parcours la saisie utilisateur
                 {
-                    nb_couleurs_places++;
+                    if(code_secret[i] == saisie_user[j])
+                    {
+                        couleurs_presente = 1;
+                        if(i == j)
+                        {
+                            nb_couleurs_places++;
+                            break;
+                        }
+                    }
                 }
+                nb_couleurs_presentes += couleurs_presente;
+
             }
             if (nb_couleurs_places == taille_code)
             {
@@ -99,6 +112,7 @@ void jeu(const char couleurs[], const int max_tentatives, const int nb_couleurs,
             {
                 printf("\t\tTentatives %d/%d \n", nb_tentatives,max_tentatives);
                 printf("couleurs bien placees : %d\n\n", nb_couleurs_places);
+                printf("couleurs presentes mais mal places : %d\n\n", nb_couleurs_presentes - nb_couleurs_places);
 
 
             }
